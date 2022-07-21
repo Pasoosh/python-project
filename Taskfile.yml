@@ -10,10 +10,10 @@ tasks:
     preconditions:
       - sh: test {{.PROCESS_NAME}}
         msg: "A PROCESS_NAME must be provided"
-      - sh: test ! -d ./{{.PROCESS_NAME}}
+      - sh: test ! -d ./src/{{.PROCESS_NAME}}
         msg: "A PROCESS with that name already exists"
     cmds:
       - echo "Creating local file structure..."
-      - mkdir ./src/{{.PROCESS_NAME}} 
-      - mkdir ./src/{{.PROJECT_NAME}}/docs
-      - cp ./dependencies/_template/requirments.txt ./dependencies/{{.PROCESS_NAME}}/{{.PROCESS_NAME}}_requirements.txt
+      - mkdir ./src/{{.PROCESS_NAME}} ./dependencies/{{.PROCESS_NAME}}
+      - mkdir ./src/{{.PROCESS_NAME}}/docs
+      - cp ./dependencies/_template/requirments.txt ./dependencies/{{.PROCESS_NAME}}/requirements.txt
