@@ -1,0 +1,19 @@
+version: "3"
+
+dotenv: ["taskfile.env"]
+
+silent: true
+
+tasks:
+  process_name:init:
+    desc: Creating a new backend business logic process
+    preconditions:
+      - sh: test {{.PROCESS_NAME}}
+        msg: "A PROCESS_NAME must be provided"
+      - sh: test ! -d ./{{.PROCESS_NAME}}
+        msg: "A PROCESS with that name already exists"
+    cmds:
+      - echo "Creating local file structure..."
+      - mkdir ./src/{{.PROCESS_NAME}} 
+      - mkdir ./src/{{.PROJECT_NAME}}/docs
+      - cp ./dependencies/_template/requirments.txt ./dependencies/{{.PROCESS_NAME}}/{{.PROCESS_NAME}}_requirements.txt
